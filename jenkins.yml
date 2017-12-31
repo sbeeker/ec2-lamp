@@ -1,0 +1,7 @@
+---
+- hosts: 
+  become: yes
+  roles: 
+    - php
+    - jenkins
+    - phpunit

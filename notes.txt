@@ -1,0 +1,17 @@
+# Create LampKey pair calling it LampKey.
+# Look up AMI instance ID.
+
+# Using jenkins-template.py create jenkins-cf.template
+python jenkins-template.py > jenkins-cf.template
+
+# Execute AWS CLI command to create stack
+aws cloudformation create-stack --stack-name jenkins --template-body file://jenkins-cf.templayte --parameters ParameterKey=KeyName, ParameterValue=LampKey
+
+aws cloudformation describe-stacks --stack-name jenkins --query 'Stacks[0].Outputs[0]'
+
+aws cloudformation describe-stacks --stack-name jenkins --query 'Stacks[0].Outputs[1]'
+
+Create jenkins.yml
+YADAYAYAY ?????????????????:q!
+ZZ
+ansible-playbook jenkins.yml

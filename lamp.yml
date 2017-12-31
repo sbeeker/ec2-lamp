@@ -1,6 +1,17 @@
 ---
-- hosts: all
+- hosts: all 
+  
   become: yes
-  roles: 
-    - apache
-    - php
+
+  tasks:
+    - name: Install Apache2 web server
+      yum:
+        name: httpd
+        state: present
+
+    - name: Ensure that Apache is up and running and will autostart on system boot
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    
