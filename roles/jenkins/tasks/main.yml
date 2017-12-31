@@ -1,0 +1,36 @@
+---
+# tasks file for jenkins
+- name: Import GPG key
+  rpm_key:
+    state: present
+    key: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+
+- name: Create Jenkins repository
+  yum_repository:
+    name: jenkins
+    description: Jenkins repository
+    baseurl: http://pkg.jenkins.io/redhat
+    enabled: yes 
+    gpgcheck: yes
+
+- name: Install Java 8
+  yum:
+    name: java-1.8.0-openjdk.x86_64
+    state: present
+- name: Install git
+  yum:
+    name: git
+    state: present
+
+- name: Set Java 8 as the default 
+  command: /usr/sbin/alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java
+
+- name: Install Jenkins
+  yum:
+    name: jenkins
+    state: present
+- name: Start the service and ensure that it is started on system boot
+  service: 
+    name: jenkins
+    enabled: yes
+    state: started

@@ -1,0 +1,23 @@
+---
+# tasks file for php
+- name: Install PHP 7 most common packages
+  yum: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - php70
+    - php70-gd
+    - php70-imap
+    - php70-mbstring
+    - php70-mysqlnd
+    - php70-opcache
+    - php70-pdo
+    - php70-pecl-apcu
+  notify: restart Apache
+
+- name: Upload the sample index.html file to /var/www/html
+  copy:
+    src: index.php
+    dest: /var/www/html/
+    owner: ec2-user
+    group: ec2-user

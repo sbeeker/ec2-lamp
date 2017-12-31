@@ -1,0 +1,19 @@
+---
+# tasks file for apache
+- yum:
+    name: httpd
+    state: absent
+- yum:
+    name: httpd-tools
+    state: absent
+- yum:
+    name: httpd24
+    state: present
+- yum:
+    name: httpd24-tools
+    state: present
+- name: Ensure that the service is running and will autostart on system boot
+  service:
+    name: httpd
+    state: started
+    enabled: true
